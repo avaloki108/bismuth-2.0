@@ -65,8 +65,7 @@ if(Qt6_FOUND)
   
   find_package(Qt6 ${QT6_MIN_VERSION} CONFIG REQUIRED COMPONENTS DBus Quick Svg Test)
   
-  find_package(
-    KF6 ${KF6_MIN_VERSION} REQUIRED
+  find_package(KF6 ${KF6_MIN_VERSION} REQUIRED
     COMPONENTS Config
                ConfigWidgets
                CoreAddons
@@ -74,7 +73,7 @@ if(Qt6_FOUND)
                I18n
                GlobalAccel)
   
-  find_package(KF6KDecoration REQUIRED)
+  find_package(KDecoration3 REQUIRED)
 else()
   set(QT_MAJOR_VERSION 5)
   message(STATUS "Building with Qt5")

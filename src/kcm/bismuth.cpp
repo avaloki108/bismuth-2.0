@@ -20,7 +20,7 @@ K_PLUGIN_CLASS_WITH_JSON(BismuthSettings, "metadata.json")
 
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
 BismuthSettings::BismuthSettings(QObject *parent, const KPluginMetaData &data)
-    : KCModule(parent, data)
+    : KQuickManagedConfigModule(parent, data)
 #else
 BismuthSettings::BismuthSettings(QObject *parent, const QVariantList &args)
     : KQuickAddons::ManagedConfigModule(parent, args)
@@ -52,7 +52,7 @@ Bismuth::Config *BismuthSettings::config() const
 void BismuthSettings::save()
 {
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
-    KCModule::save();
+    KQuickManagedConfigModule::save();
 #else
     KQuickAddons::ManagedConfigModule::save();
 #endif

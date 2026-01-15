@@ -6,7 +6,7 @@
 #pragma once
 
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
-#include <KCModule>
+#include <KQuickManagedConfigModule>
 #else
 #include <KQuickAddons/ManagedConfigModule>
 #endif
@@ -14,7 +14,7 @@
 #include "bismuth_config.h"
 
 #if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
-class BismuthSettings : public KCModule
+class BismuthSettings : public KQuickManagedConfigModule
 #else
 class BismuthSettings : public KQuickAddons::ManagedConfigModule
 #endif

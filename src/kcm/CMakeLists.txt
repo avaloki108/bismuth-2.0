@@ -20,9 +20,11 @@ if(QT_MAJOR_VERSION EQUAL 6)
     kcm_bismuth
     PRIVATE Qt6::Core
             Qt6::DBus
+            Qt6::Quick
             KF6::CoreAddons
             KF6::I18n
             KF6::KCMUtils
+            KF6::KCMUtilsQuick
             KF6::ConfigCore
             KF6::ConfigWidgets)
 else()
@@ -34,7 +36,7 @@ else()
             KF5::I18n
             KF5::QuickAddons
             KF5::ConfigCore
-            KF5::ConfigGui)
+            KF5::ConfigWidgets)
 endif()
 
 kconfig_add_kcfg_files(kcm_bismuth GENERATE_MOC "bismuth_config.kcfgc")

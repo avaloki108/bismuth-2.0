@@ -13,7 +13,7 @@ if(QT_MAJOR_VERSION EQUAL 6)
   target_link_libraries(
     bismuth_kdecoration
     PUBLIC Qt6::Core
-    PRIVATE KF6::KDecoration KF6::ConfigCore KF6::ConfigWidgets)
+    PRIVATE KDecoration3::KDecoration KF6::ConfigCore KF6::ConfigWidgets)
 else()
   target_link_libraries(
     bismuth_kdecoration
