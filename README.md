@@ -54,9 +54,9 @@ https://user-images.githubusercontent.com/14205339/148564378-1def9350-a871-4f75-
 
 ### Requirements
 
-- A Linux distribution with KDE Plasma version 5.20 or higher
-- Qt version 5.15 or higher
-- KDE Frameworks version 5.78 or higher
+- A Linux distribution with KDE Plasma version 5.20 or higher (or Plasma 6.0 or higher for Qt6/KF6 build)
+- Qt version 5.15 or higher (or Qt 6.6 or higher for Plasma 6)
+- KDE Frameworks version 5.78 or higher (or KF 6.0 or higher for Plasma 6)
 
 You can check if your system matches these requirements by going to System
 Settings > About this System.

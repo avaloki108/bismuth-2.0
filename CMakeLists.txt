@@ -23,6 +23,8 @@ option(
 
 set(QT_MIN_VERSION "5.15.0")
 set(KF5_MIN_VERSION "5.78.0")
+set(QT6_MIN_VERSION "6.6.0")
+set(KF6_MIN_VERSION "6.0.0")
 
 # HACK: Use git to get the recent version We could explicitly set the version
 # via project declaration But this would conflict with package.json and would
@@ -40,6 +42,7 @@ string(REPLACE "v" "" CMAKE_PROJECT_VERSION "${CMAKE_PROJECT_VERSION}")
 # PACKAGE_JSON) string(JSON CMAKE_PROJECT_VERSION GET ${PACKAGE_JSON} version)
 # unset(PACKAGE_JSON)
 
+# Detect Qt version
 find_package(ECM ${KF5_MIN_VERSION} REQUIRED NO_MODULE)
 set(CMAKE_MODULE_PATH ${ECM_MODULE_PATH} "${PROJECT_SOURCE_DIR}/cmake/")
 
@@ -53,20 +56,43 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
-find_package(Qt5 ${QT_MIN_VERSION} CONFIG REQUIRED COMPONENTS DBus Quick Svg
-                                                              Test)
+# Try to find Qt6 first, fall back to Qt5
+find_package(Qt6 ${QT6_MIN_VERSION} CONFIG COMPONENTS DBus Quick Svg Test)
 
-find_package(
-  KF5 ${KF5_MIN_VERSION} REQUIRED
-  COMPONENTS Config
-             ConfigWidgets
-             CoreAddons
-             Declarative
-             GlobalAccel
-             KCMUtils
-             I18n)
-
-find_package(KDecoration2 REQUIRED)
+if(Qt6_FOUND)
+  set(QT_MAJOR_VERSION 6)
+  message(STATUS "Building with Qt6")
+  
+  find_package(Qt6 ${QT6_MIN_VERSION} CONFIG REQUIRED COMPONENTS DBus Quick Svg Test)
+  
+  find_package(
+    KF6 ${KF6_MIN_VERSION} REQUIRED
+    COMPONENTS Config
+               ConfigWidgets
+               CoreAddons
+               KCMUtils
+               I18n
+               GlobalAccel)
+  
+  find_package(KF6KDecoration REQUIRED)
+else()
+  set(QT_MAJOR_VERSION 5)
+  message(STATUS "Building with Qt5")
+  
+  find_package(Qt5 ${QT_MIN_VERSION} CONFIG REQUIRED COMPONENTS DBus Quick Svg Test)
+  
+  find_package(
+    KF5 ${KF5_MIN_VERSION} REQUIRED
+    COMPONENTS Config
+               ConfigWidgets
+               CoreAddons
+               Declarative
+               GlobalAccel
+               KCMUtils
+               I18n)
+  
+  find_package(KDecoration2 REQUIRED)
+endif()
 
 include_directories("${PROJECT_SOURCE_DIR}/external")
 

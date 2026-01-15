@@ -26,15 +26,27 @@ add_subdirectory(kconf_update)
 target_sources(bismuth_core PRIVATE qml-plugin.cpp ts-proxy.cpp controller.cpp
                                     qmldir ${BISMUTH_LOG})
 
-target_link_libraries(
-  bismuth_core
-  PRIVATE Qt5::Core
-          Qt5::Quick
-          Qt5::Qml
-          KF5::ConfigCore
-          KF5::ConfigGui
-          KF5::GlobalAccel
-          KF5::I18n)
+if(QT_MAJOR_VERSION EQUAL 6)
+  target_link_libraries(
+    bismuth_core
+    PRIVATE Qt6::Core
+            Qt6::Quick
+            Qt6::Qml
+            KF6::ConfigCore
+            KF6::ConfigWidgets
+            KF6::GlobalAccel
+            KF6::I18n)
+else()
+  target_link_libraries(
+    bismuth_core
+    PRIVATE Qt5::Core
+            Qt5::Quick
+            Qt5::Qml
+            KF5::ConfigCore
+            KF5::ConfigGui
+            KF5::GlobalAccel
+            KF5::I18n)
+endif()
 
 kconfig_add_kcfg_files(bismuth_core GENERATE_MOC "config.kcfgc")
 

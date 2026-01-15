@@ -18,8 +18,13 @@
 
 K_PLUGIN_CLASS_WITH_JSON(BismuthSettings, "metadata.json")
 
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+BismuthSettings::BismuthSettings(QObject *parent, const KPluginMetaData &data)
+    : KCModule(parent, data)
+#else
 BismuthSettings::BismuthSettings(QObject *parent, const QVariantList &args)
     : KQuickAddons::ManagedConfigModule(parent, args)
+#endif
     , m_config(new Bismuth::Config(this))
 {
     KAboutData *aboutData = new KAboutData(QStringLiteral("kcm_bismuth"),
@@ -32,7 +37,9 @@ BismuthSettings::BismuthSettings(QObject *parent, const QVariantList &args)
     aboutData->addAuthor(i18nc("@info:credit", "Author"), i18nc("@info:credit", "Author"), QStringLiteral("author@domain.com"));
 
     setAboutData(aboutData);
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
     setButtons(Help | Apply | Default);
+#endif
 
     qmlRegisterAnonymousType<Bismuth::Config>("org.kde.bismuth.private", 1);
 }
@@ -44,7 +51,11 @@ Bismuth::Config *BismuthSettings::config() const
 
 void BismuthSettings::save()
 {
+#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
+    KCModule::save();
+#else
     KQuickAddons::ManagedConfigModule::save();
+#endif
     reloadKWinScript();
 }
 
