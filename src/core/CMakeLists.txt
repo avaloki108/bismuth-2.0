@@ -43,7 +43,7 @@ else()
             Qt5::Quick
             Qt5::Qml
             KF5::ConfigCore
-            KF5::ConfigWidgets
+            KF5::ConfigGui
             KF5::GlobalAccel
             KF5::I18n)
 endif()

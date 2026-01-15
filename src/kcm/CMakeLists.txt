@@ -36,7 +36,7 @@ else()
             KF5::I18n
             KF5::QuickAddons
             KF5::ConfigCore
-            KF5::ConfigWidgets)
+            KF5::ConfigGui)
 endif()
 
 kconfig_add_kcfg_files(kcm_bismuth GENERATE_MOC "bismuth_config.kcfgc")
